@@ -16,29 +16,30 @@ Sequence Diagram
 
 **Components**
 
-AWS Lambda function: Identifying inactive users and disabling their access.
+-> AWS Lambda function: Identifying inactive users and disabling their access.
 
-AWS CloudTrail: Provides user activity logs.
+-> AWS CloudTrail: Provides user activity logs.
 
-AWS IAM: Provides user management capabilities.
+-> AWS IAM: Provides user management capabilities.
 
-Amazon EventBridge: Schedules the Lambda function to run monthly.
+-> Amazon EventBridge: Schedules the Lambda function to run monthly.
 
-Amazon SNS: Sends reports about disabled users to designated administrators.
+-> Amazon SNS: Sends reports about disabled users to designated administrators.
 
 **Key Features:**
-Checks CloudTrail logs for user activity within the last 31 days.
 
-Excludes specified users from deactivation.
+-> Checks CloudTrail logs for user activity within the last 31 days.
 
-Disables both console and programmatic access for inactive users.
+-> Excludes specified users from deactivation.
 
-Logs action for auditing purposes.
+-> Disables both console and programmatic access for inactive users.
 
-Sends detailed reports via SNS.
+-> Logs action for auditing purposes.
+
+-> Sends detailed reports via SNS.
 
 **Deployment Steps**
-Enable CloudTrail: 
+1. Enable CloudTrail: 
 
 Ensure CloudTrail is enabled and configured to log user activities.
 
@@ -58,25 +59,25 @@ Delete the user's login profile (if exists) using aws iam delete-login-profile
 
 Finally, delete the user using aws iam delete-user
 
-Create a new Lambda function:
+2. Create a new Lambda function:
 
-Create an IAM role for the Lambda function
+3. Create an IAM role for the Lambda function
 
 Attach the necessary permissions.
 
-Set up an EventBridge rule:
+4. Set up an EventBridge rule:
 
 Create a new rule to trigger the Lambda function weekly.
 
 Use the cron expression.
 
-Test the function:
+5. Test the function:
 
 Use the AWS Lambda console to test with sample event data.
 
 Monitor CloudWatch Logs for function output and any errors.
 
-Configure SNS:
+6. Configure SNS:
 
 Create an SNS topic for sending reports.
 
