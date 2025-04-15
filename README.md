@@ -1,16 +1,20 @@
 # Identifying-and-removing-access-for-inactive-users-in-AWS
 
-Introduction
+**Introduction**
 
 This document explains an automated process for identifying and removing access for inactive users in AWS. As Virufy grows and evolves, managing user access becomes increasingly complex. 
 
 This system automatically identifies and disables IAM users without activity recorded in CloudTrail for a specified period (default: 31 days). It uses a Lambda function triggered on a weekly schedule to perform this task. Additionally, it sends a detailed report to a specific user via Amazon SNS, listing all users who were disabled.
 
 Architecture Diagram
+![image](https://github.com/user-attachments/assets/fc8ee518-c3c6-414f-95e2-c3cf1542c4f0)
+
 
 Sequence Diagram
+![image](https://github.com/user-attachments/assets/8dd97b47-3f43-4388-b978-645512440d73)
 
-Components
+
+**Components**
 
 AWS Lambda function: Identifying inactive users and disabling their access.
 
@@ -22,8 +26,7 @@ Amazon EventBridge: Schedules the Lambda function to run monthly.
 
 Amazon SNS: Sends reports about disabled users to designated administrators.
 
-Key Features:
-
+**Key Features:**
 Checks CloudTrail logs for user activity within the last 31 days.
 
 Excludes specified users from deactivation.
@@ -34,8 +37,7 @@ Logs action for auditing purposes.
 
 Sends detailed reports via SNS.
 
-Deployment Steps
-
+**Deployment Steps**
 Enable CloudTrail: 
 
 Ensure CloudTrail is enabled and configured to log user activities.
